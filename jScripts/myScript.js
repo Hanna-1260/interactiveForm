@@ -133,7 +133,7 @@ updateMainImage();
 
 // פונקציה שמופעלת כאשר הכפתור - שגרו אלינו נלחץ, תציג את סיכום ההזמנה
 function showReservSummery() {
-    const name = document.getElementById('fullName').value.trim(); // יצירת משתנה של שם המזמין תוך כדי בדיקה שאין רווחים מיותרים
+    const name = nameInput.value.trim(); // יצירת משתנה של שם המזמין תוך כדי בדיקה שאין רווחים מיותרים
 
     // יצירת שני משתנים של סוג האטריות ורמת החריפות שנבחרו לפי הערך של הלייבל שסומן
     const noodleLabel = document.querySelector('input[name="itriyoType"]:checked + label').innerText;
