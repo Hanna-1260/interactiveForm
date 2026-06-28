@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"
+        integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+
+    <!--    <link href="styles/reset.css" rel="stylesheet" />-->
+    <link href="styles/myStyle.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <main>
+        <h1>ביחרו את מרכיבי הראמן</h1>
+        <div class="gridContent">
+            <form novalidate>
+                <div class="optionContainer">
+                    <fieldset>
+                        <legend>סוג אטריות <span class="asterisk">*</span></legend>
+                        <div class="input-group">
+                            <input type="radio" id="udon" name="itriyoType" value="udon" required>
+                            <label for="udon">אודון</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="radio" id="beans" name="itriyoType" value="beans" required>
+                            <label for="beans">שעועית</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="radio" id="eggs" name="itriyoType" value="eggs" required>
+                            <label for="eggs">ביצים</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>רמת חריפות <span class="asterisk">*</span></legend>
+                        <div class="input-group">
+                            <input type="radio" id="notSpicy" name="spicyLevel" value="notSpicy" required>
+                            <label for="notSpicy">לא חריף</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="radio" id="bitSpicy" name="spicyLevel" value="bitSpicy" required>
+                            <label for="bitSpicy">חריף בקטנה</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="radio" id="verySpicy" name="spicyLevel" value="verySpicy" required>
+                            <label for="verySpicy">חריף זה אחלה</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="radio" id="extremeSpicy" name="spicyLevel" value="extremeSpicy" required>
+                            <label for="extremeSpicy">חריף זה אשששש</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>בא לי להוסיף</legend>
+                        <div class="input-group">
+                            <input type="checkbox" id="mushrooms" name="sides" value="mushrooms">
+                            <label for="mushrooms">פטריות</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="checkbox" id="greenOnion" name="sides" value="greenOnion">
+                            <label for="greenOnion">בצל ירוק</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="checkbox" id="lettuce" name="sides" value="lettuce">
+                            <label for="lettuce">באק צ'וי</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="checkbox" id="egg" name="sides" value="egg">
+                            <label for="egg">ביצה</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="checkbox" id="beef" name="sides" value="beef">
+                            <label for="beef">בקר</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="checkbox" id="tofu" name="sides" value="tofu">
+                            <label for="tofu">טופו</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="checkbox" id="seaweed" name="sides" value="seaweed">
+                            <label for="seaweed">אצות</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>למי ההזמנה?</legend>
+                        <div class="name-field">
+                            <label for="fullName">שם מלא: </label>
+                            <input type="text" id="fullName" placeholder="ישראל ישראלי" required>
+                        </div>
+                        <div class="notes-field">
+                            <label for="notes">משהו נוסף? </label>
+                            <textarea name="notes" id="notes" rows="5"
+                                placeholder="למשל, אם יש לך יום הולדת"></textarea>
+                        </div>
+                    </fieldset>
+                    <input type="button" id="send" value="שגרו אלינו" onclick="showReservSummery()">
+                </div>
+            </form>
+
+            <div class="userChoice">
+                <fieldset>
+                    <legend>המנה של: <span id="displayName"></span></legend>
+                    <div id="itriyotUser"></div>
+                    <div id="spicyUser"></div>
+                    <div id="sidesUser">
+                        <img src="images/sides/mushrooms.png" alt="פטריות" />
+                        <img src="images/sides/greenOnion.png" alt="בצל ירוק" />
+                        <img src="images/sides/lettuce.png" alt="באק צ'וי" />
+                        <img src="images/sides/eggs.png" alt="ביצה" />
+                        <img src="images/sides/beef.png" alt="בקר" />
+                        <img src="images/sides/tofu.png" alt="טופו" />
+                        <img src="images/sides/seaweed.png" alt="אצות" />
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+
+    </main>
+    <div id="summaryModal" class="modal">
+        <div class="modal-content">
+            <div id="modalBody">
+            </div>
+        </div>
+    </div>
+</body>
+<!-- JS -->
+<script src="jScripts/myScript.js"></script>
+
+</html>
