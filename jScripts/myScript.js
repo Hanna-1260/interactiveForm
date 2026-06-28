@@ -46,7 +46,7 @@ function updateMainImage() {
     }
 
     // הצגת התמונה המעודכנת בתוך תיבת התצוגה
-    itriyotUser.innerHTML = '<img src="' + src + '>';
+    itriyotUser.innerHTML = '<img src=' + src + '>';
 }
 
 
@@ -156,13 +156,14 @@ function showReservSummery() {
         }
     }
 
-
-
-
-
     // אם לא נבחרו תוספות
     if (sidesText === '') {
         sidesText = 'ללא תוספות';
+    }
+
+    let notes = document.getElementById('notes').value.trim(); // יצירת משתנה של הערות המזמין תוך כדי בדיקה שאין רווחים מיותרים
+    if (notes === '') { // אם לא נכתבו הערות
+        notes = 'ללא הערות';
     }
 
     // יצירת משתנה של כל התוכן של סיכום ההזמנה שיודפס למשתמש
@@ -171,7 +172,8 @@ function showReservSummery() {
         '<p><strong>שם המזמין:</strong> ' + name + '</p>' +
         '<p><strong>סוג אטריות:</strong> ' + noodleLabel + '</p>' +
         '<p><strong>רמת חריפות:</strong> ' + spicyLabel + '</p>' +
-        '<p><strong>תוספות שנבחרו:</strong> ' + sidesText + '</p>';
+        '<p><strong>תוספות שנבחרו:</strong> ' + sidesText + '</p>' +
+        '<p><strong>הערות:</strong> ' + notes + '</p>' ;
 
     // הדפסת התוכן בחלונית הסיכום
     document.getElementById('modalBody').innerHTML = contentHtml;
