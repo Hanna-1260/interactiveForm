@@ -259,3 +259,19 @@ legend {
 #modalBody p {
     margin: 8px 0;
 }
+
+.name-field input,
+.notes-field textarea {
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #ccc;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.name-field input:focus,
+.notes-field textarea:focus {
+    border-color: #ffa826;
+    box-shadow: 0 0 5px rgba(255, 168, 38, 0.5);
+    outline: none;
+}
