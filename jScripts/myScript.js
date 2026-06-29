@@ -3,9 +3,6 @@ const nameInput = document.getElementById('fullName'); // תיבת הטקסט ל
 const sendBtn = document.getElementById('send'); // כפתור סיכום הטופס
 const itriyotUser = document.getElementById('itriyotUser'); // תגית שמציגה את סוג האטריות שהמזמין יבחר
 
-nameInput.value = ''; // מרוקן את תיבת הטקסט של השם
-document.getElementById('displayName').textContent = ''; // ריקון טקסט שם המזמין שיופיע בחלק - המנה שלי 
-
 // פונקציה שתציג את התמונה המתאימה בטופס, בהתאם לבחירות המשתמש
 function updateMainImage() {
     const noodleRadio = document.querySelector('input[name="itriyoType"]:checked'); // יצירת משתנה לסוג האטריות שהמשתמש בוחר
@@ -23,26 +20,18 @@ function updateMainImage() {
     // בדיקה האם המשתמש בחר רמת חריפות כדי להחליף לתמונה מתאימה שמציגה את רמת החריפות
     if (spicyRadio !== null) { // אם המשתמש בחר רמת חריפות, כלומר הבחירה אינה ריקה
         const spicyValue = spicyRadio.value; // משתנה של ערך רמת החריפות
-        let folder = ''; // פתיחת משתנה של התיקייה המתאימה לפי רמת החריפות
-        let suffix = ''; // פתיחת משתנה של סיומת שם התמונה לפי רמת החריפות
 
         // תנאים לבדיקת רמת החריפת שנבחרה, והתאמת התיקייה וסיומת התמונה בהתאם
-        if (spicyValue === 'notSpicy') {
-            folder = 'notSpicy';
-            suffix = 'NotSpicy';
+            if (spicyValue === 'notSpicy') {
+            src = 'images/notSpicy/' + noodleValue + 'NotSpicy.png';
         } else if (spicyValue === 'bitSpicy') {
-            folder = 'bitSpicy';
-            suffix = 'BitSpicy';
+            src = 'images/bitSpicy/' + noodleValue + 'BitSpicy.png';
         } else if (spicyValue === 'verySpicy') {
-            folder = 'Very';
-            suffix = 'VerySpicy';
+            src = 'images/Very/' + noodleValue + 'VerySpicy.png';
         } else if (spicyValue === 'extremeSpicy') {
-            folder = 'Extreme';
-            suffix = 'ExtremeSpicy';
+            src = 'images/Extreme/' + noodleValue + 'ExtremeSpicy.png';
         }
 
-        // הצבת נתיב מציאת התמונה המתאימה לפי תוצאות הבדיקה בתנאים 
-        src = 'images/' + folder + '/' + noodleValue + suffix + '.png';
     }
 
     // הצגת התמונה המעודכנת בתוך תיבת התצוגה
@@ -52,26 +41,10 @@ function updateMainImage() {
 
 // פונקציה לעדכון שקיפות תמונות התוספות בהתאם לסימון של המשתמש
 function updateSideImage(checkbox) { // הפונקציה מוגדרת עם פרמטר חדש שמטרתו להעביר לתוכה את הבחירה של המשתמש מתוך התוספות
-    let fileName = ''; // יצירת משתנה של שם הקובץ של התמונה של התוספת
+ 
+    const fileName = checkbox.id + '.png';  // יצירת משתנה של שם הקובץ של התמונה של התוספת לפי ערך האיידי שלו
 
-    // בדיקת האם ערך ה-id של התוספת שנבחרה סומן, ואם כן להתאים לו את שם הקובץ המתאים
-    if (checkbox.id === 'mushrooms') {
-        fileName = 'mushrooms.png';
-    } else if (checkbox.id === 'greenOnion') {
-        fileName = 'greenOnion.png';
-    } else if (checkbox.id === 'lettuce') {
-        fileName = 'lettuce.png';
-    } else if (checkbox.id === 'egg') {
-        fileName = 'eggs.png';
-    } else if (checkbox.id === 'beef') {
-        fileName = 'beef.png';
-    } else if (checkbox.id === 'tofu') {
-        fileName = 'tofu.png';
-    } else if (checkbox.id === 'seaweed') {
-        fileName = 'seaweed.png';
-    }
-
-    // חיפוש התמונה שבשם שלה מופיע שם הקובץ שנמצא בבדיקה
+    // חיפוש התמונה שבשם שלה מופיע שם הקובץ המתאים
     const img = document.querySelector('#sidesUser img[src*="' + fileName + '"]');
 
     // תנאי שבודק האם נמצאה תמונה שמתאימה לתוספת
@@ -97,39 +70,6 @@ function checkValidity() {
         sendBtn.disabled = true; // כפתור השליחה יהיה לא פעיל
     }
 }
-
-// יצירת משתנה גלובלי שיוצר רשימה של כל כפתורי הרדיו - סוגי האטריות ורמות החריפות
-const radios = document.querySelectorAll('input[name="itriyoType"], input[name="spicyLevel"]');
-
-// לולאה להצמדת מאזין אירועים לכל כפתורי הרדיו (אטריות וחריפות)
-for (let i = 0; i < radios.length; i++) { // מעבר על כל הרשימה - התחלה מ-0 כי היא מתנהגת כמו מערך  
-    radios[i].addEventListener('change', function () { // הצמדה לכל כפתור רדיו מאזין אירועים לשינוי סימון הבחירה
-        updateMainImage(); // קריאה לפונקציה לעדכון התמונה לפי השינוי
-        checkValidity(); // קריאה לפונקציה לבדיקת תקינות הטופס לפי השינוי
-    });
-}
-
-// יצירת משתנה גלובלי שיוצר רשימה של כל כפתורי הצ'קבוקס - תוספות
-const checkboxes = document.querySelectorAll('input[name="sides"]');
-
-// לולאה להצמדת מאזין אירועים לכל צ'ק-בוקס של תוספת
-for (let i = 0; i < checkboxes.length; i++) { // מעבר על כל הרשימה - התחלה מ-0 כי היא מתנהגת כמו מערך  
-    const cb = checkboxes[i]; // יצירת משתנה של כפתור הצ'קבוקס הנוכחי
-    cb.addEventListener('change', function () { // הצמדה לכל צ'ק-בוקס מאזין אירועים לשינוי סימון הבחירה
-        updateSideImage(cb); // קריאה לפונקציה לעדכון התמונה לפי השינוי
-    });
-    updateSideImage(cb); // שליחת כל תוספת לפונקציה שמשנה את שקיפות התמונה של התוספת, כדי לוודא שהדפדפן לא שמר בחירות קודמות
-}
-
-// מאזין אירועים להקלדת שם המשתמש בתיבת הטקסט - מעתיק את השם בלייב ובודק תקינות
-nameInput.addEventListener('input', function () {
-    document.getElementById('displayName').textContent = nameInput.value;
-    checkValidity(); // קריאה לפונקציה לבדיקת תקינות הטופס
-});
-
-// בדיקות ועדכונים ראשוניים בעת טעינת הדף בפעם הראשונה
-checkValidity();
-updateMainImage();
 
 // פונקציה שמופעלת כאשר הכפתור - שגרו אלינו נלחץ, תציג את סיכום ההזמנה
 function showReservSummery() {
@@ -180,3 +120,39 @@ function showReservSummery() {
     // הפעלת חלונית הסיכום
     document.getElementById('summaryModal').classList.add('active');
 }
+
+// יצירת משתנה גלובלי שיוצר רשימה של כל כפתורי הרדיו - סוגי האטריות ורמות החריפות
+const radios = document.querySelectorAll('input[name="itriyoType"], input[name="spicyLevel"]');
+
+// לולאה להצמדת מאזין אירועים לכל כפתורי הרדיו (אטריות וחריפות)
+for (let i = 0; i < radios.length; i++) { // מעבר על כל הרשימה - התחלה מ-0 כי היא מתנהגת כמו מערך  
+    radios[i].addEventListener('change', function () { // הצמדה לכל כפתור רדיו מאזין אירועים לשינוי סימון הבחירה
+        updateMainImage(); // קריאה לפונקציה לעדכון התמונה לפי השינוי
+        checkValidity(); // קריאה לפונקציה לבדיקת תקינות הטופס לפי השינוי
+    });
+}
+
+// פעולות איפוס ראשוניות בעת טעינת הדף בפעם הראשונה
+const checkboxes = document.querySelectorAll('input[name="sides"]'); // יצירת משתנה גלובלי שיוצר רשימה של כל כפתורי הצ'קבוקס - תוספות
+
+// לולאה להצמדת מאזין אירועים לכל צ'ק-בוקס של תוספת
+for (let i = 0; i < checkboxes.length; i++) { // מעבר על כל הרשימה - התחלה מ-0 כי היא מתנהגת כמו מערך  
+    const cb = checkboxes[i]; // יצירת משתנה של כפתור הצ'קבוקס הנוכחי
+    cb.addEventListener('change', function () { // הצמדה לכל צ'ק-בוקס מאזין אירועים לשינוי סימון הבחירה
+        updateSideImage(cb); // קריאה לפונקציה לעדכון התמונה לפי השינוי
+    });
+    updateSideImage(cb); // שליחת כל תוספת לפונקציה שמשנה את שקיפות התמונה של התוספת, כדי לוודא שהדפדפן לא שמר בחירות קודמות
+}
+
+// מאזין אירועים להקלדת שם המשתמש בתיבת הטקסט - מעתיק את השם בלייב ובודק תקינות
+nameInput.addEventListener('input', function () {
+    document.getElementById('displayName').textContent = nameInput.value;
+    checkValidity(); // קריאה לפונקציה לבדיקת תקינות הטופס
+});
+
+// בדיקות ועדכונים ראשוניים בעת טעינת הדף בפעם הראשונה
+checkValidity();
+updateMainImage();
+
+nameInput.value = ''; // מרוקן את תיבת הטקסט של השם
+document.getElementById('notes').value = ''; // מרוקן את תיבת הטקסט של ההערות   
